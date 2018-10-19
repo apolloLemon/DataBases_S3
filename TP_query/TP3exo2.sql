@@ -1,4 +1,3 @@
-/*
 -- 1
 select nom 
 from personnels
@@ -30,11 +29,14 @@ where A.qualif='CHEF DE SERVICE';
 select S.nom, P.nom, P.prnm, P.sx
 from services S left join personnels P on S.cdsrv = P.cdsrv;
 
--- 7 */
+-- 7
+select S.nom, 
+case when P.nom is null THEN '****' else P.nom end, 
+case when P.prnm is null THEN '****' else P.prnm end,
+case when P.sx is null THEN '*' else P.sx end
+from services S left join personnels P on S.cdsrv = P.cdsrv;
 
-
--- 8 */ 
-/*
+-- 8
 select A.cdsrv, A.nom
 from services A left join personnels P on A.cdsrv = P.cdsrv
-where P.cdprs is null; */
+where P.cdprs is null;
