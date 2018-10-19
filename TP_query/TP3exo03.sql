@@ -21,7 +21,7 @@ where qte >= any(select qte
 		where nomc = 'Jean')
 order by numcom;
 
--- 4 */
+-- 4
 select distinct nomp
 from commande
 where nomp not in (select nomp
@@ -29,6 +29,11 @@ where nomp not in (select nomp
 			where nomc = 'Jean'); 
 
 -- 5 */
+select numcom,nomp
+from client natural join commande natural join produit natural join fournisseur
+where substr(upper(Villec),7) = substr(upper(Villef),7);
+
+
 -- 6 */
 -- 7 */
 -- 8 */
