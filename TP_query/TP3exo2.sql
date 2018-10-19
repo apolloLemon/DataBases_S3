@@ -7,13 +7,13 @@ where (qualif='INFIRMIERE') and nom in (select nom
 
 -- 2
 select p.nom, p.prnm
-from personnels p join patients 
-	on cdprs = cdpat;
+from personnels p join patients q
+	on p.nom = q.nom and P.prnm = q.prnm;
 
 -- 3
 select p.nom, p.prnm
-from personnels p join patients 
-	on cdprs = cdpat;
+from personnels p join patients q
+	on p.nom = q.nom and P.prnm = q.prnm;
 
 -- 4
 select A.cdprs, A.prnm, A.qualif, A.cdspr, B.prnm, B.qualif 
