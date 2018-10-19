@@ -14,9 +14,11 @@ having sum(qte) >= (select sum(qte)
 
 
 -- 3 */
-select numcom
+select distinct numcom
 from commande
-where qte
+where qte >= any(select qte
+		from commande natural join client
+		where nomc = 'Jean');
 
 -- 4 */
 -- 5 */
