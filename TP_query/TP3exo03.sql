@@ -28,12 +28,15 @@ where nomp not in (select nomp
 			from commande natural join client
 			where nomc = 'Jean'); 
 
--- 5 */
+-- 5 
 select numcom,nomp
 from client natural join commande natural join produit natural join fournisseur
 where substr(upper(Villec),7) = substr(upper(Villef),7);
 
-
 -- 6 */
+select villeF, villeC
+from client natural join commande natural join produit natural join fournisseur;
+
+
 -- 7 */
 -- 8 */
