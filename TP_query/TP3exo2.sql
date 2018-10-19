@@ -27,6 +27,13 @@ where A.qualif='CHEF DE SERVICE';
 
 -- 6
 select S.nom, P.nom, P.prnm, P.sx
+from services S left join (select nom,prnm,sx,cdsrv
+				from personnels
+				where qualif='CHEF DE SERVICE') P 
+on S.cdsrv = P.cdsrv;
+
+-- 6 old
+select S.nom, P.nom, P.prnm, P.sx
 from services S left join personnels P on S.cdsrv = P.cdsrv;
 
 -- 7
