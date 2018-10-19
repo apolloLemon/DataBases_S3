@@ -26,9 +26,15 @@ select A.nom, A.prnm, A.sx, A.datnais, B.nom
 from personnels A join services B on A.cdsrv = B.cdsrv
 where A.qualif='CHEF DE SERVICE';
 
--- 6 */
+-- 6
+select S.nom, P.nom, P.prnm, P.sx
+from services S left join personnels P on S.cdsrv = P.cdsrv;
+
 -- 7 */
--- 8 */
+
+
+-- 8 */ 
+/*
 select A.cdsrv, A.nom
 from services A left join personnels P on A.cdsrv = P.cdsrv
-where P.cdprs is null;
+where P.cdprs is null; */
