@@ -4,15 +4,20 @@ select sum(qte)
 from commande natural join client
 where nomc = 'Pierre';
 
--- 2 */
-select numcom
+-- 2
+select numcom , sum(qte)
 from commande
-where qte >= (select sum(qte)
+group by numcom
+having sum(qte) >= (select sum(qte)
 		from commande natural join client
 		where nomc = 'Vincent');
 
 
 -- 3 */
+select numcom
+from commande
+where qte
+
 -- 4 */
 -- 5 */
 -- 6 */
