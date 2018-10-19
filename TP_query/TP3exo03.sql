@@ -13,14 +13,21 @@ having sum(qte) >= (select sum(qte)
 		where nomc = 'Vincent');
 
 
--- 3 */
+-- 3
 select distinct numcom
 from commande
 where qte >= any(select qte
 		from commande natural join client
-		where nomc = 'Jean');
+		where nomc = 'Jean')
+order by numcom;
 
 -- 4 */
+select distinct nomp
+from commande
+where nomp not in (select nomp
+			from commande natural join client
+			where nomc = 'Jean'); 
+
 -- 5 */
 -- 6 */
 -- 7 */
