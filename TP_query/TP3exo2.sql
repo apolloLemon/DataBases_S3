@@ -41,7 +41,10 @@ select S.nom,
 case when P.nom is null THEN '****' else P.nom end, 
 case when P.prnm is null THEN '****' else P.prnm end,
 case when P.sx is null THEN '*' else P.sx end
-from services S left join personnels P on S.cdsrv = P.cdsrv;
+from services S left join (select nom,prnm,sx,cdsrv
+				from personnels
+				where qualif='CHEF DE SERVICE') P 
+on S.cdsrv = P.cdsrv;
 
 -- 8
 select A.cdsrv, A.nom
