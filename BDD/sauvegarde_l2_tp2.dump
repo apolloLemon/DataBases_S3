@@ -1,0 +1,294 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.7
+-- Dumped by pg_dump version 9.5.7
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: conges; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE conges (
+    cdprs character(3) NOT NULL,
+    datdeb date NOT NULL,
+    datfin date NOT NULL
+);
+
+
+ALTER TABLE conges OWNER TO postgres;
+
+--
+-- Name: consultations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE consultations (
+    cdpat character(3) NOT NULL,
+    cdprs character(3) NOT NULL,
+    datclt date
+);
+
+
+ALTER TABLE consultations OWNER TO postgres;
+
+--
+-- Name: patients; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE patients (
+    cdpat character(3) NOT NULL,
+    nom character varying(15) NOT NULL,
+    prnm character varying(15) NOT NULL,
+    sx character(1) NOT NULL,
+    datnais date NOT NULL,
+    insee character(13),
+    prof character varying(25) NOT NULL
+);
+
+
+ALTER TABLE patients OWNER TO postgres;
+
+--
+-- Name: personnels; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE personnels (
+    cdprs character(3) NOT NULL,
+    nom character varying(15) NOT NULL,
+    prnm character varying(15) NOT NULL,
+    sx character(1) NOT NULL,
+    datnais date NOT NULL,
+    qualif character varying(25) NOT NULL,
+    cdsrv character(2) NOT NULL,
+    dattit date,
+    cdspr character(3),
+    trtmnt numeric(8,2),
+    vactn numeric(8,2)
+);
+
+
+ALTER TABLE personnels OWNER TO postgres;
+
+--
+-- Name: services; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE services (
+    cdsrv character(2) NOT NULL,
+    nom character varying(25) NOT NULL,
+    localis character varying(20) NOT NULL,
+    batim character varying(10) NOT NULL,
+    tlphn character(10) NOT NULL
+);
+
+
+ALTER TABLE services OWNER TO postgres;
+
+--
+-- Data for Name: conges; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY conges (cdprs, datdeb, datfin) FROM stdin;
+060	2016-04-01	2016-04-05
+085	2016-04-09	2016-04-19
+049	2016-04-16	2016-04-20
+055	2016-04-22	2016-04-30
+067	2016-04-25	2016-05-25
+034	2016-05-02	2016-05-12
+097	2016-05-13	2016-05-24
+020	2016-05-15	2016-05-24
+027	2016-05-20	2016-06-17
+060	2016-05-23	2016-05-30
+022	2016-06-03	2016-07-12
+\.
+
+
+--
+-- Data for Name: consultations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY consultations (cdpat, cdprs, datclt) FROM stdin;
+006	063	2016-03-18
+008	056	2016-02-04
+033	028	2016-03-04
+032	052	2016-12-04
+035	082	2016-12-04
+028	056	2016-02-14
+031	028	2016-04-05
+008	006	2016-06-05
+014	065	2016-10-05
+035	075	2016-10-05
+017	028	2016-02-05
+021	072	2016-12-05
+044	056	2016-03-06
+035	065	2016-05-06
+059	031	2016-06-06
+053	025	2016-11-06
+\.
+
+
+--
+-- Data for Name: patients; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY patients (cdpat, nom, prnm, sx, datnais, insee, prof) FROM stdin;
+003	MARCHAIS	Regine	2	1991-08-08	2510851054123	VENDEUSE
+006	MARCHAL	Guy	1	1998-02-12	1481202145023	CARRELEUR
+008	BULLIER	Alain	1	1970-05-02	1600268241057	V.R.P.
+011	GAUTIER	Helene	2	1979-08-11	2591151454087	SECRETAIRE
+012	MESSEIN	Pierre	1	1967-09-04	1470408124032	VERRIER
+014	LEROI	Beatrice	2	1991-07-03	2510306026125	ENSEIGNANTE
+017	CHARLOT	Arnaud	1	1972-05-01	1420151454029	ANALYSTE
+019	DULIEU	Veronique	2	1975-03-05	2550502128001	CHARCUTIERE
+021	LEJEUNE	Isabelle	2	1963-07-07	2630708l24069	PROGRAMMEUR
+024	COSTIL	Georges	1	1960-12-06	1600651454015	BOUCHER
+026	ADNOT	Laurent	1	1973-05-09	1530906023078	BOULANGER
+027	DUMET 	Valerie	2	1962-09-12	2521268236089	SECRETAIRE
+028	PANKOW	Raymond	1	1945-03-10	1451051454011	V.R.P.
+031	DUFOUR	Myriam	2	1962-11-09	2620902213054	CAISSIERE
+032	HARDER	Andre	1	1949-03-01	1490151454026	MECANICIEN
+033	ROCHE	Marjolaine	2	1967-10-05	2670508102061	ENSEIGNANTE
+035	MARQUET	David	1	1962-03-08	1420868105063	POLICIER
+039	DUCARRE	Laurence	2	1953-10-11	2531102062045	STYLISTE
+044	VARNIER	Patricia	2	1948-11-05	2480508102034	COUTURIERE
+045	CHEMIN	Chantal	2	1965-04-01	2650151454011	COUTURIERE
+047	RIVA	Freddy	2	1965-01-10	1651002031058	MECANICIEN
+053	PARISOT	Beatrice	2	1939-09-11	2391108032026	COUTURIERE
+059	COURTOIS	Claude	1	1956-09-02	1560251454068	COIFFEUR
+057	TRIDON	Jeanne	2	1964-03-09	264095145402l	SECRETAIRE
+159	MARTIGNY	Gisele	2	1969-02-08	2690851454128	SECRETAIRE MEDICALE
+157	HAMBYE	Beatrice	2	1968-05-09	2680908045023	MANIPULATEUR RADIO
+153	MORTAIN	Therese	2	1969-11-07	2690702034031	SECRETAIRE MEDICALE
+\.
+
+
+--
+-- Data for Name: personnels; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY personnels (cdprs, nom, prnm, sx, datnais, qualif, cdsrv, dattit, cdspr, trtmnt, vactn) FROM stdin;
+011	NOTTRET	Patrice	1	1968-02-05	CHEF DE SERVICE	05	1996-01-10	\N	35764.25	2460.00
+017	CHOUBAT	Georges	1	1976-04-09	ASSISTANT	05	2004-01-05	011	27364.50	8740.00
+038	GADRET	Bernard	1	1978-02-02	CHEF DE CLINIQUE	05	2005-01-03	017	23473.10	9200.00
+075	BISTEUR	Jules	1	1971-03-10	DOCTEUR	05	\N	011	\N	5700.00
+082	COLLIN	Sylvie	2	1990-04-01	INTERNE	05	\N	038	10320.30	\N
+028	FAVE	Monique	2	1971-10-04	CHEF INFIRMIERE	05	2006-01-09	011	10470.25	\N
+034	MARTIGNY	Annie	2	1972-06-06	INFIRMIERE	05	2005-01-10	028	8218.15	\N
+045	MORTAIN	Therese	2	1969-11-07	SECRETAIRE MEDICALE	05	\N	011	5720.85	\N
+014	DETANTE	Claude	1	1956-04-08	CHEF DE SERVICE	02	1995-01-02	\N	30346.75	3580.00
+033	GEANT	Jean	1	1971-05-12	ASSISTANT	02	1992-01-11	014	21327.35	11320.00
+047	PERNET	Paul	1	1964-11-05	INTERNE	02	\N	033	9678.25	\N
+055	HAMBYE	Beatrice	2	1968-11-09	MANIPULATEUR RADIO	05	1999-01-10	014	8500.15	\N
+067	PIROU	Nathalie	2	1973-11-01	SECRETAIRE MEDICALE	02	\N	014	4830.45	\N
+021	NOTTRET	Patrick	1	1976-10-09	CHEF DE SERVICE	03	1999-01-03	\N	36160.65	5010.00
+029	MERIEUX	Josee	1	1976-08-07	ASSISTANT	03	2007-01-10	021	25348.25	8430.00
+065	BREHAL	Gilles	1	1963-07-01	DOCTEUR	03	\N	021	\N	7830.00
+072	BAROUKHEL	Philippe	1	1961-06-11	DOCTEUR	03	\N	021	\N	6025.00
+066	LEBRUN	Caroline	2	1964-12-08	INTERNE	03	\N	028	9174.75	\N
+083	BESSON	Christel	2	1970-05-02	INFIRMIERE	03	1999-01-01	028	7020.85	\N
+097	ROUALET	Sophie	2	1971-11-10	SECRETAIRE MEDICALE	03	\N	021	4920.45	\N
+018	PISTAT	Andre	1	1960-05-04	CHEF DE SERVICE	07	2003-01-01	\N	32463.15	4015.00
+025	GUYOT	Daniele	2	1975-11-03	ASSISTANT	07	2013-01-06	018	27435.35	0.00
+031	LOISEAU	Stephanie	2	1959-05-10	CHEF DE CLINIQUE	07	2006-01-03	025	22680.25	6420.00
+063	MIGEO	Michel	1	1971-08-11	DOCTEUR	07	\N	018	\N	0.00
+042	FORD	Sandra	2	1991-03-05	INTERNE	07	\N	031	10210.65	\N
+048	BOURGEOIS	Antoine	1	1995-11-01	INTERNE	07	\N	031	10480.35	\N
+027	DETANTE	Pascale	2	1960-06-12	CHEF INFIRMIERE	07	1992-01-10	018	12310.65	\N
+020	LANNOIS	Claudine	2	1966-11-02	INFIRMIERE	07	\N	027	8412.30	\N
+022	MARTIN	Corinne	2	1968-02-05	INFIRMIERE	07	1999-01-11	027	8225.30	\N
+049	LEBRUN	Florelle	2	1970-11-01	AIDE SOIGNANTE	05	\N	027	5020.25	\N
+092	DERRIEN	Emmanuelle	2	1971-02-11	SECRETAIRE MEDICALE	07	\N	018	5378.25	\N
+006	MOREAUX	Paul	1	1959-08-01	CHEF DE SERVICE	06	1996-01-09	\N	38486.95	3590.00
+052	MAURTAIN	Camille	1	1960-10-10	CHEF DE CLINIQUE	06	1996-01-01	006	22315.45	12650.00
+056	BOULEAU	Anne	2	1963-11-07	DOCTEUR	06	\N	006	\N	8230.00
+051	BOTTEREAU	Jacques	1	1960-09-07	DOCTEUR	06	\N	006	\N	0.00
+043	CARTERET	Brigitte	2	1960-07-12	INTERNE	06	\N	052	10320.30	\N
+060	LECOINTRE	Eliane	2	1967-10-01	INFIRMIERE	06	1995-01-03	006	8412.85	\N
+079	GUYOT	Catherine	2	1965-05-03	INFIRMIERE	06	1996-01-12	006	8625.75	\N
+085	BERTRAND	Christine	2	1971-08-09	AIDE SOIGNANTE	06	\N	006	5020.25	\N
+094	MARTIGNY	Gisele	2	1969-02-08	SECRETAIRE MEDICALE	06	1999-01-02	006	5378.25	\N
+\.
+
+
+--
+-- Data for Name: services; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY services (cdsrv, nom, localis, batim, tlphn) FROM stdin;
+01	ORTHOPEDIE-TRAUMATOLOGIE	al. des POETES	RONSARD	0241054037
+02	RADIOLOGIE	al. des ARTS	CHAGALL	0241054065
+03	NEURO-CHIRURGIE	al. des ARTS	DALI	0241054048
+04	GYNECOLOGIE-OBSTETRIQUE	al. des POETES	BAUDELAIRE	0241054093
+05	CARDIOLOGIE	al. des POETES	RIMBAUD	0241054021
+06	GASTRO-ENTEROLOGIE	al. des POETES	VERLAINE	0241054034
+07	RHUMATOLOGIE	al. des POETES	ROUSSEAU	0241054086
+08	CHIRURGIE-PLASTIQUE	al. des ARTS	CESAR	0241054072
+\.
+
+
+--
+-- Name: patients_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY patients
+    ADD CONSTRAINT patients_pkey PRIMARY KEY (cdpat);
+
+
+--
+-- Name: personnels_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY personnels
+    ADD CONSTRAINT personnels_pkey PRIMARY KEY (cdprs);
+
+
+--
+-- Name: services_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY services
+    ADD CONSTRAINT services_pkey PRIMARY KEY (cdsrv);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

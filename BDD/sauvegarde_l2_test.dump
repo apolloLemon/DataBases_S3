@@ -1,0 +1,352 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.7
+-- Dumped by pg_dump version 9.5.7
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: film; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE film (
+    num_film integer NOT NULL,
+    num_realisateur integer,
+    titre character varying(50),
+    genre character varying(50),
+    annee integer,
+    CONSTRAINT film_genre_check CHECK (((genre)::text = ANY ((ARRAY['Comédie'::character varying, 'Drame'::character varying, 'Science-Fiction'::character varying, 'Autre'::character varying])::text[])))
+);
+
+
+ALTER TABLE film OWNER TO postgres;
+
+--
+-- Name: jouer; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE jouer (
+    num_acteur integer NOT NULL,
+    num_film integer NOT NULL
+);
+
+
+ALTER TABLE jouer OWNER TO postgres;
+
+--
+-- Name: personne; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE personne (
+    num_personne integer NOT NULL,
+    nom character varying(50),
+    prenom character varying(50)
+);
+
+
+ALTER TABLE personne OWNER TO postgres;
+
+--
+-- Name: seq_num; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE seq_num
+    START WITH 101
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE seq_num OWNER TO postgres;
+
+--
+-- Data for Name: film; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY film (num_film, num_realisateur, titre, genre, annee) FROM stdin;
+1	102	La grande vadrouille	Comédie	1966
+2	102	Le corniaud	Comédie	1965
+3	102	Les aventures de Rabbi Jacob	Comédie	1973
+4	102	La folie des grandeurs	Comédie	1971
+5	102	L'as des as	Comédie	1982
+6	101	Les valseuses	Comédie	1974
+7	101	La femme de mon pote	Drame	1983
+8	101	Le bruit de glaçons	Drame	2010
+9	108	Pulp fiction	Comédie	1994
+10	108	Jackie Brown	Comédie	1997
+11	108	Django unchained	Autre	2012
+13	110	Les sentiers de la gloire	Drame	1957
+14	110	Shining	Autre	1980
+15	110	Full metal jacket	Autre	1987
+16	110	Barry Lyndon	Drame	1975
+17	111	Raging bull	Drame	1980
+18	111	Taxi driver	Drame	1976
+19	111	New York, New York	Autre	1977
+20	112	Il faut sauver le soldat Ryan	Drame	1998
+21	112	E.T. l'extra-terrestre	Science-Fiction	1982
+22	112	Jurassic park	Science-Fiction	1993
+23	113	L'aile ou la cuisse	Comédie	1976
+24	103	Le magnifique	Comédie	1973
+25	103	Le diable par la queue	Comédie	1969
+26	103	L'homme de Rio	Comédie	1964
+27	103	Cartouche	Drame	1962
+28	124	Tais-toi!	Comédie	2003
+29	124	La chèvre	Comédie	1981
+30	124	Les compères	Comédie	1983
+\.
+
+
+--
+-- Data for Name: jouer; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY jouer (num_acteur, num_film) FROM stdin;
+104	30
+104	29
+104	28
+104	6
+105	23
+105	4
+105	3
+105	2
+105	1
+106	6
+107	28
+109	11
+109	10
+109	9
+114	23
+114	7
+115	2
+115	1
+116	25
+116	4
+117	27
+117	26
+117	24
+117	5
+118	27
+119	24
+120	26
+137	7
+121	6
+122	19
+122	18
+122	17
+122	10
+123	10
+125	30
+125	29
+126	25
+127	25
+128	27
+128	25
+129	25
+130	19
+131	20
+132	3
+133	4
+134	5
+135	6
+136	6
+137	6
+138	7
+139	8
+140	8
+141	8
+142	8
+143	9
+144	9
+145	9
+146	11
+147	11
+148	13
+149	14
+150	14
+151	15
+152	15
+153	15
+154	16
+155	16
+156	18
+157	18
+158	18
+159	21
+160	21
+161	21
+162	22
+163	22
+164	22
+\.
+
+
+--
+-- Data for Name: personne; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY personne (num_personne, nom, prenom) FROM stdin;
+101	Blier	Bertrand
+102	Oury	Gérard
+103	De Broca	Philippe
+104	Depardieu	Gérard
+105	De Funès	Louis
+106	Dewaere	Patrick
+107	Reno	Jean
+108	Tarantino	Quentin
+109	Jackson	Samuel L.
+110	Kubrick	Stanley
+111	Scorcese	Martin
+112	Spielberg	Steven
+113	Zidi	Claude
+114	Colucci dit Coluche	Michel
+115	Raimbourg dit Bourvil	André
+116	Montand	Yves
+117	Belmondo	Jean-Paul
+118	Cardinale	Claudia
+119	Bisset	Jacqueline
+120	Dorléac	Françoise
+121	Herry dite Miou-miou	Sylvette
+122	De Niro	Robert
+123	Grier	Pam
+124	Veber	Francis
+125	Richard	Pierre
+126	Keller	Marthe
+127	Schell	Maria
+128	Rochefort	Jean
+129	Marielle	Jean-Pierre
+130	Minelli	Liza
+131	Hanks	Tom
+132	Guybet	Henri
+133	Sapritch	Alice
+134	Pisier	Marie-France
+135	Moreau	Jeanne
+136	Fossey	Brigitte
+137	Huppert	Isabelle
+138	Lhermitte	Thierry
+139	Dujardin	Jean
+140	Dupontel	Albert
+141	Alvaro	Anne
+142	Boyer	Myriam
+143	Travolta	John
+144	Willis	Bruce
+145	Thurman	Uma
+146	Foxx	Jamie
+147	Waltz	Christoph
+148	Douglas	Kirk
+149	Nicholson	Jack
+150	Duvall	Shelley
+151	Ermey	Ronald Lee
+152	Modine	Matthew
+153	D'Onofrio	Vincent
+154	Berenson	Marisa
+155	O'Neal	Ryan
+156	Keitel	Harvey
+157	Forster	Jodie
+158	Shepherd	Cybill
+159	Barrymore	Drew
+160	Wallace	Dee
+161	Thomas	Henry
+162	Goldblum	Jeff
+163	Neil	Sam
+164	Dern	Laura
+\.
+
+
+--
+-- Name: seq_num; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('seq_num', 164, true);
+
+
+--
+-- Name: film_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY film
+    ADD CONSTRAINT film_pkey PRIMARY KEY (num_film);
+
+
+--
+-- Name: jouer_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY jouer
+    ADD CONSTRAINT jouer_pkey PRIMARY KEY (num_acteur, num_film);
+
+
+--
+-- Name: personne_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY personne
+    ADD CONSTRAINT personne_pkey PRIMARY KEY (num_personne);
+
+
+--
+-- Name: film_num_realisateur_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY film
+    ADD CONSTRAINT film_num_realisateur_fkey FOREIGN KEY (num_realisateur) REFERENCES personne(num_personne);
+
+
+--
+-- Name: jouer_num_acteur_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY jouer
+    ADD CONSTRAINT jouer_num_acteur_fkey FOREIGN KEY (num_acteur) REFERENCES personne(num_personne);
+
+
+--
+-- Name: jouer_num_film_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY jouer
+    ADD CONSTRAINT jouer_num_film_fkey FOREIGN KEY (num_film) REFERENCES film(num_film);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

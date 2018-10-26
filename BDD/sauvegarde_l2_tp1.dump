@@ -1,0 +1,219 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.7
+-- Dumped by pg_dump version 9.5.7
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: client; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE client (
+    numc character(6) NOT NULL,
+    nomc character varying(20) NOT NULL,
+    anneenaissc integer,
+    villec character varying(20) NOT NULL
+);
+
+
+ALTER TABLE client OWNER TO postgres;
+
+--
+-- Name: commande; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE commande (
+    numcom character(6) NOT NULL,
+    numc character(6) NOT NULL,
+    nomp character varying(20) NOT NULL,
+    qte integer NOT NULL
+);
+
+
+ALTER TABLE commande OWNER TO postgres;
+
+--
+-- Name: fournisseur; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE fournisseur (
+    numf character(7) NOT NULL,
+    nomf character varying(20) NOT NULL,
+    agef integer,
+    villef character varying(20) NOT NULL
+);
+
+
+ALTER TABLE fournisseur OWNER TO postgres;
+
+--
+-- Name: produit; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE produit (
+    numf character(7) NOT NULL,
+    nomp character varying(20) NOT NULL,
+    prix integer NOT NULL
+);
+
+
+ALTER TABLE produit OWNER TO postgres;
+
+--
+-- Data for Name: client; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY client (numc, nomc, anneenaissc, villec) FROM stdin;
+CLI001	Jean	1975	75006 Paris
+CLI002	Paul	1978	75003 Paris
+CLI003	Vincent	1984	94200 Evry
+CLI004	Pierre	1970	92400 Courbevoie
+CLI005	Daniel	1963	44112 Nantes
+\.
+
+
+--
+-- Data for Name: commande; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY commande (numcom, numc, nomp, qte) FROM stdin;
+COM001	CLI001	briques	5
+COM001	CLI001	ciment	10
+COM002	CLI002	briques	12
+COM002	CLI002	parpaing	15
+COM002	CLI002	sable	9
+COM003	CLI003	sable	17
+COM004	CLI004	tuiles	17
+COM004	CLI004	briques	8
+COM005	CLI005	ciment	14
+COM005	CLI005	parpaing	10
+COM006	CLI005	briques	21
+COM007	CLI002	ciment	12
+COM008	CLI004	parpaing	8
+COM009	CLI001	tuiles	15
+\.
+
+
+--
+-- Data for Name: fournisseur; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY fournisseur (numf, nomf, agef, villef) FROM stdin;
+FOUR001	ABOUNAYAN	52	92190 Meudon
+FOUR002	CIMA	37	44150 NANTES
+FOUR003	PREBLOCS	48	92230 GENNEVILLIERS
+FOUR004	SAMACO	61	75116 PARIS
+FOUR005	DAMASCO	29	49100 ANGERS
+\.
+
+
+--
+-- Data for Name: produit; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY produit (numf, nomp, prix) FROM stdin;
+FOUR001	sable	300
+FOUR001	briques	1500
+FOUR001	parpaing	1150
+FOUR003	tuiles	1200
+FOUR003	parpaing	1300
+FOUR004	parpaing	1350
+FOUR004	ciment	900
+FOUR004	briques	1450
+FOUR002	sable	350
+FOUR005	briques	1500
+FOUR005	tuiles	1150
+\.
+
+
+--
+-- Name: client_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY client
+    ADD CONSTRAINT client_pkey PRIMARY KEY (numc);
+
+
+--
+-- Name: commande_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY commande
+    ADD CONSTRAINT commande_pkey PRIMARY KEY (numcom, numc, nomp);
+
+
+--
+-- Name: fournisseur_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY fournisseur
+    ADD CONSTRAINT fournisseur_pkey PRIMARY KEY (numf);
+
+
+--
+-- Name: produit_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY produit
+    ADD CONSTRAINT produit_pkey PRIMARY KEY (numf, nomp);
+
+
+--
+-- Name: commande_numc_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY commande
+    ADD CONSTRAINT commande_numc_fkey FOREIGN KEY (numc) REFERENCES client(numc) ON DELETE CASCADE;
+
+
+--
+-- Name: produit_numf_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY produit
+    ADD CONSTRAINT produit_numf_fkey FOREIGN KEY (numf) REFERENCES fournisseur(numf) ON DELETE CASCADE;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
