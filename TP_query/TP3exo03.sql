@@ -33,10 +33,13 @@ select numcom,nomp
 from client natural join commande natural join produit natural join fournisseur
 where substr(upper(Villec),7) = substr(upper(Villef),7);
 
--- 6 */
+-- 6
 select villeF, villeC
 from client natural join commande natural join produit natural join fournisseur;
 
 
 -- 7 */
+select NomF, NomP
+from produit natural join fournisseur;
+
 -- 8 */
