@@ -38,8 +38,13 @@ select villeF, villeC
 from client natural join commande natural join produit natural join fournisseur;
 
 
--- 7 */
+-- 7
 select NomF, NomP
 from produit natural join fournisseur;
 
 -- 8 */
+select NomF, NomP
+from produit natural join fournisseur
+where nomp = any(select A.nomp
+				from commande A natural join client
+				where nomC = 'Daniel');
