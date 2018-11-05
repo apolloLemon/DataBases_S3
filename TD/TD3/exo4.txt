@@ -31,3 +31,9 @@ no-immat			->	puissance
 marque				-> pays
 
 marque, agence		-> chiffre-aff
+
+Clef(no-immat, agence)
+
+1NF ok
+2NF non	
+	no-immat -> puissance
