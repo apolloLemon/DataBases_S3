@@ -1,0 +1,33 @@
+R(no-immat, puisance, marque, pays, agence, chiffre-aff)
+
+no-immat			-> puissance
+					-> marque
+					-> pays
+					-> agence
+					-> chiffre-aff
+
+puissance, marque	-> pays
+					-> agence
+					-> chiffre-aff
+
+marque				-> pays
+
+chiffre-aff, marque -> agence
+
+
+
+clef (no-immat)
+1NF ok
+2NF ok pas de sous enssemble
+3NF non no-immat -> marque -> pays
+
+
+//////////
+Correction
+
+no-immat			->	puissance
+					->	marque
+
+marque				-> pays
+
+marque, agence		-> chiffre-aff
