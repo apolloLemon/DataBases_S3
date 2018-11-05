@@ -1,0 +1,28 @@
+A1: 
+no-piece, prix-unit, taux-tva, libelle, categorie
+
+no-piece 	->	prix-unit
+			->	libelle
+			->	categorie
+
+categorie	->	taux-tva
+
+clef (no-piece)
+1NF ok
+2NF ok
+3NF non no-piece -> categorie -> taux-tva
+
+
+
+
+A2:
+no-gamme, nom-gamme, no-oper, rang-oper, nom-oper
+
+no-gamme 	->	nom-gamme
+no-oper 	->	nom-oper
+no-gamme, no-oper 	-> rang-oper
+
+clef (no-game,no-oper)
+1NF ok
+2NF non	no-gamme -> nom-gamme
+		no-oper -> nom-oper

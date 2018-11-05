@@ -1,0 +1,27 @@
+R(A,B,C,D,E)
+ABC -> 	D
+ABC -> 	E
+		E -> B
+		E -> C
+		E -> D
+
+1.
+A, B, C 
+(A,B) (A,C) (B,C) ne sont pas des clefs
+=> ABC minimale => clef
+
+2.
+1NF ok
+2NF ok 	ABC -> D
+		ABC -> E sont elementaires
+3NF non ABC -> D pas direct
+				ABC -> E -> D 
+
+
+1.
+A et E ne sont pas des clefs
+=> (A, E) clef
+
+2.
+1NF ok
+2NF non AE -> B pas elementaire car E -> B
