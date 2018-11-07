@@ -1,1 +1,4 @@
-espece systematique
+nom_espece_comm, nom_espece, mvmnt, cons, nom_classBio_comm, nom_classBio, char_classBio
+nom_dec, prnom_dec, date_dec, mort_dec, code_Ville, nom_Ville, pop_Ville, pays_Ville
+climat, precipitations, superficie, nom_pays, pop_pays, pol_pays, dir_pays
+nbr_individues
