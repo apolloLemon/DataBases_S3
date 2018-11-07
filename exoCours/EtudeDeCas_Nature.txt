@@ -2,3 +2,29 @@ nom_espece_comm, nom_espece, mvmnt, cons, nom_classBio_comm, nom_classBio, char_
 nom_dec, prnom_dec, date_dec, mort_dec, code_Ville, nom_Ville, pop_Ville, pays_Ville
 climat, precipitations, superficie, nom_pays, pop_pays, pol_pays, dir_pays
 nbr_individues
+
+nom_espece 		-> nom_espece_comm
+				-> mvmnt
+				-> cons
+				--> nom_classBio
+
+nom_classBio 	-> nom_classBio_comm
+				-> char_classBio
+
+territoire		-> climat
+				-> precipitations
+				-> superficie
+
+nom_dec, prnom_dec 	-> date_dec
+					-> mort_dec
+					--> code_Ville
+					--> nom_Ville
+
+code_Ville, nom_Ville 	-> pop_Ville
+						--> nom_pays
+
+nom_pays 	-> pop_pays
+			-> pol_pays
+			-> dir_pays
+
+nom_espece, territoire -> nbr_individues
