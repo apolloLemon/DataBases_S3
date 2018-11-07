@@ -1,0 +1,74 @@
+Course
+nom_Course, date_Creation, nombre_Editions, (ville_Arrive), (villes_Traverse)
+
+Ville
+nom_Ville, code_Ville, population_Ville, (pays_Ville)
+
+Pays
+nom_Pays, code_Pays, population_Pays, continent_Pays
+
+Equipe
+nom_Sponsor, budget_Equipe, (pays_Equipe)
+
+Cycliste
+nom_Cycliste, prnom_Cycliste, num_Cycliste, date_Cycliste, num_Dossard, classement_Cycliste, (ville_Cycliste), (pays_Cycliste), (equipe_Cycliste), (courses_Cycliste)
+
+MembreEncadrement (orga)
+nom_Cadre, prnom_Cadre, num_Cadre, (pays_Cadre), (equipe_Cadre), role_Cadre, (courses_Cadre)
+
+
+
+nom_Course	-> date_Creation
+			-> nombre_Editions
+			--> code_Ville
+			--> nom_Ville
+
+code_Ville, nom_Ville	-> population_Ville
+						--> code_Pays
+
+code_Pays 	-> nom_Pays
+			-> population_Pays
+			-> continent_Pays
+
+nom_Sponsor	-> budget_Equipe
+			--> code_Pays
+
+num_Cycliste	-> nom_Cycliste
+				-> prnom_Cycliste
+				-> date_Cycliste
+				--> nom_Sponsor
+				--> code_Pays
+				--> code_Ville
+				--> nom_Ville
+
+num_Cadre		-> nom_Cadre
+				-> prnom_Cadre
+				-> role_Cadre
+				--> nom_Sponsor
+				--> code_Pays
+
+num_Cycliste, nom_Course	-> num_Dossard
+							-> classement_Cycliste
+
+
+
+Model Relationel:
+
+CYCLISTE( {num_Cycliste} , nom_Cycliste, prnom_Cycliste, date_Cycliste, [nom_Sponsor], [code_Pays], [nom_Ville], [code_Ville])
+
+CADRE( {num_Cadre} , nom_Cadre, prnom_Cadre, role_Cadre, [nom_sponsor],[code_Pays])
+
+EQUIPE( {nom_sponsor} , budget, [code_Pays])
+
+COURSE( {nom_Course} , date_Course, nbr_Course, [nom_Ville],[code_Ville])
+
+VILLE( {code_Ville} , {nom_Ville},pop_Ville, [code_Pays])
+
+PAYS( {code_Pays} , nom_Pays,pop_Pays, continent )
+
+
+PARTICIPE( {[num_Cycliste]} , {[nom_Course]} , num_Dossard, classement)
+
+INTERVIENS( {[num_Cadre]} , {[nom_Course]} )
+
+VILLES_TRAVERSES( {[nom_Course]} , {[nom_Ville]} , {[code_Ville]} )

@@ -1,0 +1,14 @@
+select NomEns, PrenEns, count(NomMat)
+	from enseignant E join matiere M
+		on( E.NumEns = M.NumEns)
+	groupby NomEns, PrenEns
+
+
+
+select NomEt, PrenEt
+	from Etudiant E join passcont P
+	on E.NumEt = P.NumEt
+	join control C on C.NumCont = P.NumCont
+	where Note >= 10 and (NomMat = Maths)
+	groupby met
+		having Count()
