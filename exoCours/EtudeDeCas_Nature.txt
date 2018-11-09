@@ -28,3 +28,14 @@ nom_pays 	-> pop_pays
 			-> dir_pays
 
 nom_espece, territoire -> nbr_individues
+
+TERRITOIRE( {territoire} , climat, precipitations, superficie, )
+CLASSE( {nom_classBio} , nom_classBio_comm, char_classBio )
+ESPECE( {nom_espece} , nom_espece_comm, mvmnt, cons, [nom_classBio], [territoire])
+PAYS( {nom_pays} , pop_pays, pol_pays, dir_pays)
+VILLE( {code_Ville} , {nom_Ville} , pop_Ville,, [nom_pays])
+DECOUVREUR( {nom_dec} , {prnm_dec} , date_dec, mort_dec, {code_Ville} , {nom_Ville})
+
+DECOUVRE (nom_espece, {nom_dec} , {prnm_dec})
+HEBERGE (territoire, nom_espece, nbr_individues)
+SITUATION (territoire, nom_espece)
