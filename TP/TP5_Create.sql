@@ -76,9 +76,9 @@ insert into tarif values
 	('FRANCE3','DEBSOIR',200);
 
 insert into programmation values
-	('NS1','TF1','SOIR','2018-02-17'),
-	('NS1','FRANCE3','JOUR','2020-02-17'),
-	('NS2','TF1','DEBSOIR','2020-02-17'),
-	('P12','TF1','DEBSOIR','2019-02-17'),
-	('P13','TF1','DEBSOIR','2020-02-17'),
-	('P13','FRANCE3','DEBSOIR','2020-02-17');
+	('NS1','TF1','SOIR','2017-02-18'),
+	('NS1','FRANCE3','JOUR','2017-02-20'),
+	('NS2','TF1','DEBSOIR','2017-02-20'),
+	('P12','TF1','DEBSOIR','2017-02-19'),
+	('P13','TF1','DEBSOIR','2017-02-20'),
+	('P13','FRANCE3','DEBSOIR','2017-02-20');
