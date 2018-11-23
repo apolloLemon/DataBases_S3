@@ -1,22 +1,22 @@
 create sequence ETi minvalue 1111;
 
 create table groupe(
-	nomgroupe char(2) primary key,
+	nomgroupe char(5) primary key,
 	intitulegroupe varchar
 );
 
 create table etudiant(
 	numet numeric primary key,
-	nomet varchar,
-	prenomet varchar,
-	adret varchar,
+	nomet char(30),
+	prenomet char(30),
+	adret char(50),
 	datnais date,
 	nomgr char references group(nomgroupe)
 );
 
 create table enseignant(
 	numens numeric primary key,
-	nomens varchar
+	nomens char(30)
 );
 
 create table matiere(
