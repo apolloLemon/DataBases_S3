@@ -1,11 +1,24 @@
+drop sequence ETi;
+drop sequence Ci;
+drop sequence profi;
+
+drop table passcont;
+drop table controle;
+drop table matiere;
+drop table enseignant;
+drop table etudiant;
+drop table groupe;
+
+
 create sequence ETi minvalue 1111;
 create sequence Ci;
+create sequence profi;
 
 create table groupe(
 	nomgroupe char(5) primary key,
 	intitulegroupe varchar,
 	constraint grpname
-	check nomgroupe in ('A1','A2','A3','A4','A5','A6')
+	check (nomgroupe in ('A1','A2','A3','A4','A5','A6'))
 );
 
 create table etudiant(
@@ -14,9 +27,9 @@ create table etudiant(
 	prenomet char(30),
 	adret char(50),
 	datnais date,
-	nomgr char, references group(nomgroupe) on delete cascade on update cascade,
+	nomgr char(5) references groupe(nomgroupe) on delete cascade on update cascade,
 	constraint agerange
-	check (extract(year from age(datnais)) between 16 and 40)
+	check ((extract(year from age(datnais)) between 16 and 40))
 );
 
 create table enseignant(
@@ -29,7 +42,7 @@ create table matiere(
 	coefmat numeric,
 	numens numeric references enseignant(numens) on delete cascade on update cascade,
 	constraint coefrange
-	check coef between 1 and 8
+	check (coefmat between 1 and 8)
 );
 
 create table controle(
@@ -38,7 +51,7 @@ create table controle(
 	datcont date,
 	coef numeric,
 	constraint coefrange
-	check coef between 1 and 3
+	check (coef between 1 and 3)
 );
 
 create table passcont(
@@ -47,5 +60,5 @@ create table passcont(
 	note numeric,
 	primary key (numet,numcont),
 	constraint noterange
-	check coef between 0 and 20
+	check (note between 0 and 20)
 );
