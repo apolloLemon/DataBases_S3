@@ -1,37 +1,40 @@
+create sequence ETi minvalue 1111;
+
+create table groupe(
+	nomgroupe char(2) primary key,
+	intitulegroupe varchar
+);
+
 create table etudiant(
-	numet numeric,
+	numet numeric primary key,
 	nomet varchar,
 	prenomet varchar,
 	adret varchar,
 	datnais date,
-	nomgr char(2)
+	nomgr char references group(nomgroupe)
 );
 
-create table groupe(
-	nomgroupe char(2),
-	intitulegroupe varchar
+create table enseignant(
+	numens numeric primary key,
+	nomens varchar
 );
 
-create table passcont(
-	numet numeric,
-	numcont numeric,
-	note numeric
+create table matiere(
+	nommat varchar primary key,
+	coefmat numeric,
+	numens numeric references enseignant(numens)
 );
 
 create table controle(
-	numcont numeric,
-	nommat varchar,
+	numcont numeric primary key,
+	nommat varchar references matiere(nommat),
 	datcont date,
 	coef numeric,
 );
 
-create table matiere(
-	nommat varchar,
-	coefmat numeric,
-	numens numeric
-);
-
-create table enseignant(
-	numens numeric,
-	nomens varchar
+create table passcont(
+	numet numeric references etudiant(numet),
+	numcont numeric references controle(numcont),
+	note numeric,
+	primary key (numet,numcont)
 );
