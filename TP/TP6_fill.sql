@@ -1,4 +1,4 @@
-insert into group values
+insert into groupe values
 	('A1','Informatique'),
 	('A2','Math-Info'),
 	('A3','Bio-Info'),
@@ -6,7 +6,7 @@ insert into group values
 	('A5','Math');
 
 insert into etudiant values
-	(nextval('ETi'),'AHDJOUDJ','Yannick','Angers','2000-01-18','A1'),
+	(nextval('ETi'),'AHDJOUDJ','Ianik','Angers','2000-01-18','A1'),
 	(nextval('ETi'),'AMEUR','Adil','Cholet','1999-02-17','A1'),
 	(nextval('ETi'),'CALVAIRE','Isabelle','Nantes','2001-03-01','A2'),
 	(nextval('ETi'),'GHULAM','William','Cholet','2001-04-27','A2'),
@@ -24,13 +24,13 @@ insert into enseignant values
 	(nextval('profi'),'Leandri');
 
 insert into matiere values
-	('Algo 2',0,1),
-	('Algo 3',0,1),
-	('Math1',0,1),
-	('Gestion',0,1),
-	('TE',0,1),
-	('Math2',0,1),
-	('Anglais',0,1);
+	('Algo 2',6,1),
+	('Algo 3',7,2),
+	('Math1',6,3),
+	('Gestion',7,4),
+	('TE',7,5),
+	('Math2',6,6),
+	('Anglais',7,7);
 
 insert into controle values 
 	(nextval('Ci'), 'Algo 2','2018-01-15',1),
