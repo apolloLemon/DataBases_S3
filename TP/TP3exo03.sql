@@ -1,4 +1,3 @@
-/*
 -- 1
 select sum(qte)
 from commande natural join client
@@ -42,7 +41,7 @@ from client natural join commande natural join produit natural join fournisseur;
 select NomF, NomP
 from produit natural join fournisseur;
 
--- 8 */
+-- 8
 select NomF, NomP
 from produit natural join fournisseur
 where nomp = any(select A.nomp
